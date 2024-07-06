@@ -372,9 +372,9 @@ function wrapper(plugin_info) {
         },
       "pokenav":
         {
-          "stop_create": `mod-poi poi create pokestop "${p_name}" ${p_lat} ${p_lng}`,
-          "gym_create": `mod-poi poi create gym "${p_name}" ${p_lat} ${p_lng}`,
-          "gym_create_ex": `mod-poi poi create gym "${p_name}" ${p_lat} ${p_lng} "ex_eligible: 1"`,
+          "stop_create": `mod-poi poi create poi_type:pokestop name:${p_name} latitude:${p_lat} longitude:${p_lng}`,
+          "gym_create": `mod-poi poi create poi_type:gym name:${p_name} latitude:${p_lat} longitude:${p_lng}`,
+          "gym_create_ex": `mod-poi poi create poi_type:gym name:${p_name} latitude:${p_lat} longitude:${p_lng} ex_eligible:True`,
           "mark_ex": `mod-poi poi update ${label} "ex_eligible: 1"`,
           "convert_to_gym": `mod-poi poi update ${label} "type: gym"`,
           "update_poi_gym": `mod-poi poi update ${label} "name: ${p_name}" "latitude: ${p_lat}" "longitude: ${p_lng}" "type: gym" "ex_eligible: 0"`,
