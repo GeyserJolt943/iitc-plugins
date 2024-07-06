@@ -229,7 +229,7 @@ function wrapper(plugin_info) {
 
     const commands = getCommands(portalData, false);
 
-    const commandMessageText = settings.botPrefix + commands.stop_info + "\n" + settings.botPrefix + commands.convert_to_gym;
+    const commandMessageText = settings.botPrefix + commands.convert_to_gym;
 
     sendCommandToWebhook(commandMessageText);
   };
@@ -243,7 +243,7 @@ function wrapper(plugin_info) {
 
     const commands = getCommands(portalData, prompt);
 
-    const commandMessageText = settings.botPrefix + commands.gym_info + "\n" + settings.botPrefix + commands.mark_ex;
+    const commandMessageText = settings.botPrefix + commands.mark_ex;
 
     sendCommandToWebhook(commandMessageText);
   }
@@ -293,12 +293,12 @@ function wrapper(plugin_info) {
       let commands = getCommands(portalData, shouldPrompt);
       if (poiType == "gym") {
         const is_ex = document.getElementById("PogoGymEx");
-        commandMessageText = settings.botPrefix + commands.gym_info + "\n" + settings.botPrefix + commands.update_poi_gym;
+        commandMessageText = settings.botPrefix + commands.update_poi_gym;
         if (is_ex && is_ex.checked) {
-            commandMessageText = settings.botPrefix + commands.gym_info + "\n" + settings.botPrefix + commands.update_poi_EXgym;
+            commandMessageText = settings.botPrefix + commands.update_poi_EXgym;
         }
-      } else {
-        commandMessageText = settings.botPrefix + commands.stop_info + "\n" + settings.botPrefix + commands.update_poi_stop;
+        } else {
+        commandMessageText = settings.botPrefix + commands.update_poi_stop;
       }
     }
 
@@ -375,13 +375,13 @@ function wrapper(plugin_info) {
           "stop_create": `mod-poi poi create poi_type:pokestop name:${p_name} latitude:${p_lat} longitude:${p_lng}`,
           "gym_create": `mod-poi poi create poi_type:gym name:${p_name} latitude:${p_lat} longitude:${p_lng}`,
           "gym_create_ex": `mod-poi poi create poi_type:gym name:${p_name} latitude:${p_lat} longitude:${p_lng} ex_eligible:True`,
-          "mark_ex": `mod-poi poi update poi_id:<insert ID here> ex_eligible:True`,
-          "convert_to_gym": `mod-poi poi update poi_id:<insert ID here> type:gym`,
-          "update_poi_gym": `mod-poi poi update poi_id:<insert ID here> name:${p_name} latitude:${p_lat} longitude:${p_lng} type:gym ex_eligible:False`,
-          "update_poi_EXgym": `mod-poi poi update poi_id:<insert ID here> name:${p_name} latitude:${p_lat} longitude:${p_lng} type:gym ex_eligible:True`,
-          "update_poi_stop": `mod-poi poi update poi_id:<insert ID here> name:${p_name} latitude:${p_lat} longitude:${p_lng} type:pokestop`,
-          "stop_info": `poi show type:pokestop name:${p_name}`,
-          "gym_info": `poi show type:gym name:${p_name}`,
+          "mark_ex": `mod-poi poi update ${label} "ex_eligible: 1"`,
+          "convert_to_gym": `mod-poi poi update ${label} "type: gym"`,
+          "update_poi_gym": `mod-poi poi update ${label} "name: ${p_name}" "latitude: ${p_lat}" "longitude: ${p_lng}" "type: gym" "ex_eligible: 0"`,
+          "update_poi_EXgym": `mod-poi poi update ${label} "name: ${p_name}" "latitude: ${p_lat}" "longitude: ${p_lng}" "type: gym" "ex_eligible: 1"`,
+          "update_poi_stop": `mod-poi poi update ${label} "name: ${p_name}" "latitude: ${p_lat}" "longitude: ${p_lng}" "type: pokestop"`,
+          "stop_info": `poi show ${p_name}`,
+          "gym_info": `poi show ${p_name}`,
           "poi_url": `https://pgmap.org/map.html?center=${p_lat},${p_lng}&zoom=18&map=OpenStreetMap&show=1111`
         }
     }
